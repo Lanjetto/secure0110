@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/secureService
+    username: postgres
+    password: root
+
+  jpa:
+    properties:
+      hibernate:
+      format_sql: true
+      show_sql: true
+
+    hibernate:
+      ddl-auto: none
