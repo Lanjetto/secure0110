@@ -16,6 +16,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:3.3.3'
     implementation 'org.postgresql:postgresql:42.7.4'
     implementation 'org.springframework.boot:spring-boot-starter-security:3.3.3'
+    implementation 'com.auth0:java-jwt:4.4.0'
+
 
 }
 
