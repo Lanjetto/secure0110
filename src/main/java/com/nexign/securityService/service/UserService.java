@@ -33,7 +33,7 @@ public class UserService implements UserDetailsService {
         }
 
         return byLogin.map(user ->
-                new User(user.getLogin(), user.getPass(), Collections.emptyList()))
+                new User(user.getLogin(), user.getPass(), Collections.singleton(user.getRole())))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 

@@ -1,8 +1,9 @@
 package com.nexign.securityService.entity;
 
 
+import org.springframework.security.core.GrantedAuthority;
 
-public enum RoleType implements Role {
+public enum RoleType implements Role, GrantedAuthority {
     USER, ADMIN;
 
     @Override
@@ -11,4 +12,8 @@ public enum RoleType implements Role {
     }
 
 
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
