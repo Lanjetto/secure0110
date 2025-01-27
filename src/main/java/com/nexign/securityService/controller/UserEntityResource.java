@@ -8,6 +8,7 @@ import com.nexign.securityService.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,14 +20,15 @@ import java.util.*;
 public class UserEntityResource {
 
     private final UserEntityRepository userEntityRepository;
-
+    private final PasswordEncoder passwordEncoder;
     private final ObjectMapper objectMapper;
 
 
     @Autowired
-    public UserEntityResource(UserEntityRepository userEntityRepository,
+    public UserEntityResource(UserEntityRepository userEntityRepository, PasswordEncoder passwordEncoder,
                               ObjectMapper objectMapper) {
         this.userEntityRepository = userEntityRepository;
+        this.passwordEncoder = passwordEncoder;
         this.objectMapper = objectMapper;
     }
 
@@ -50,6 +52,7 @@ public class UserEntityResource {
     @PostMapping
     public Map<String, String> create(@RequestBody UserEntity userEntity) {
         String pass = userEntity.getPass();
+        userEntity.setPass(passwordEncoder.encode(pass));
         userEntityRepository.save(userEntity);
         return Collections.singletonMap("user", userEntity.getLogin());
     }
